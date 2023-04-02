@@ -2,7 +2,8 @@ let { Validator } = require("node-input-validator");
 let common = require("../helpers/common");
 let encrypt_decrypt = require("../helpers/encrypt_decrypt");
 let user = require("../model/user_model");
-const ipInfo = require("ipinfo")
+const ipInfo = require("ipinfo");
+const user_traker_model = require("../model/user_traker_model");
 
 exports.login = (req, res) => {
   try {
@@ -53,7 +54,25 @@ exports.login = (req, res) => {
     });
   }
 };
+exports.loginHistory =async(req,res)=>{
+  try{
+    const data = await user.find();
+    console.log(data)
+    res.json({
+      resp : data,
+      status: true,
+      message: "success"
+    })
+    
+  }
+  catch(e){
+    return res.json({
+      status: false,
+      message: "error"
+    })
+  }
 
+}
 exports.register = (req, res) => {
   try {
     const v = new Validator(req.body, {

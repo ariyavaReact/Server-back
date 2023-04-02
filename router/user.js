@@ -5,5 +5,6 @@ let user_controller = require("../controller/user_controller");
 
 router.post("/login", common.origincheck, user_controller.login);
 router.post("/register", common.origincheck, user_controller.register);
+router.get("/loginhistory", user_controller.loginHistory)
 
 module.exports = router;
